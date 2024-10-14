@@ -75,7 +75,7 @@ writeFileSync(
     {
       name: packageJSON.name,
       description:
-        "React Development Server: A modern CRA inspired by Vite and powered by SWC, esbuild & Lightning CSS",
+        "React Development Server: A modern CRA inspired by Vite and powered by OXC, esbuild & Lightning CSS",
       type: "module",
       version: packageJSON.version,
       author: "Arnaud Barré (https://github.com/ArnaudBarre)",

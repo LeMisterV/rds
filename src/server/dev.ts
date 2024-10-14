@@ -24,11 +24,11 @@ import { jsonCache } from "./json.ts";
 import { logger } from "./logger.ts";
 import type { Extension } from "./mimeTypes.ts";
 import { openInEditor } from "./openInEditor.ts";
+import { initOXC } from "./oxc.ts";
 import { initPublicWatcher, publicFiles, publicFilesCache } from "./public.ts";
 import { initScanner } from "./scanner.ts";
 import { startServer } from "./startServer.ts";
 import { svgCache } from "./svg.ts";
-import { initSWC } from "./swc.ts";
 import type { LoadedFile } from "./types.ts";
 import {
   cacheDir,
@@ -64,10 +64,10 @@ export const main = commandWrapper(async (config) => {
 
   if (!existsSync(cacheDir)) mkdirSync(cacheDir);
   const ws = initWS();
-  const swcCache = await initSWC(config);
+  const oxcCache = await initOXC(config);
   const scanner = initScanner({
     downwind,
-    swcCache,
+    oxcCache,
     lintFile,
     watchFile: (path) => srcWatcher.add(path),
   });
@@ -81,7 +81,7 @@ export const main = commandWrapper(async (config) => {
   setupHmr({
     downwind,
     srcWatcher,
-    swcCache,
+    oxcCache,
     scanner,
     importsTransform,
     lintFile,
